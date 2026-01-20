@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const animatedElements = document.querySelectorAll(
-    ".animate-from-left, .animate-from-right, .process-card, .card",
-  );
+  const animatedElements = document.querySelectorAll(".process-card, .card");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -14,6 +12,28 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       threshold: 0.25, // aparece cuando se ve 25%
+    },
+  );
+
+  animatedElements.forEach((el) => observer.observe(el));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const animatedElements = document.querySelectorAll(
+    ".animate-from-left, .animate-from-right",
+  );
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.25,
     },
   );
 
