@@ -1,6 +1,8 @@
 .hero {
   position: relative;
+  min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   overflow: hidden;
   color: #ffffff;
 }
@@ -33,16 +35,15 @@
   position: relative;
   z-index: 1;
 
-  min-height: 100svh;
+  min-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
-  padding-top: calc(72px + env(safe-area-inset-top));
-  padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  padding-top: 0; // ✅ sin aire arriba
+  padding-bottom: 96px; // dejá aire abajo si querés
   padding-inline: 1.25rem;
 }
-
 /* Título */
 .hero__title {
   margin: 0;
