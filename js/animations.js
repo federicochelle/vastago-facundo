@@ -19,23 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const animatedElements = document.querySelectorAll(
-    ".animate-from-left, .animate-from-right",
-  );
+  const heroLogo = document.querySelector(".hero-reveal");
+  if (!heroLogo) return;
 
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        entry.target.classList.add("is-visible");
-        obs.unobserve(entry.target);
-      });
-    },
-    {
-      threshold: 0.25,
-    },
-  );
-
-  animatedElements.forEach((el) => observer.observe(el));
+  requestAnimationFrame(() => {
+    heroLogo.classList.add("is-visible");
+  });
 });

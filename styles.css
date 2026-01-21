@@ -28,11 +28,7 @@
   border-bottom: none;
   /* color base (hereda logo + toggle) */
   color: #ffffff;
-  transition:
-    background-color 0.3s ease,
-    backdrop-filter 0.3s ease,
-    box-shadow 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   /* =========================
      CONTENIDO
      ========================= */
@@ -123,7 +119,7 @@
     /* ✅ el padding va en el contenido, no en .navbar .navbar */
   }
   .navbar .navbar-content {
-    padding: 1rem 1.25rem; /* ✅ respiración lateral */
+    padding: 0.5rem 1.25rem; /* ✅ respiración lateral */
   }
   .navbar .navbar-brand {
     font-size: 1.1rem;
@@ -149,9 +145,7 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px);
-    transition:
-      opacity 0.25s ease,
-      transform 0.25s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
   .navbar .navbar-nav a {
     color: #1e293b;
@@ -176,78 +170,79 @@
 
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
-  min-height: 100dvh;
   overflow: hidden;
-  color: #ffffff;
-}
-
-/* Imagen de fondo */
-.hero__bg {
-  position: absolute;
-  inset: 0;
+  /* Mobile: hero pantalla completa */
+  min-height: 100vh;
   background-image: url("img/plantas.png");
   background-size: cover;
   background-position: center;
-  transform: scale(1.02);
+  background-repeat: no-repeat;
 }
 
-/* Overlay para legibilidad */
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      1200px 600px at 20% 10%,
-      rgba(0, 0, 0, 0.12),
-      transparent 55%
-    ),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.55));
-}
-
-/* Contenido */
 .hero__container {
   position: relative;
   z-index: 1;
+  /* que el contenedor SIEMPRE mida lo mismo que el hero */
   min-height: inherit;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-top: 0;
-  padding-bottom: 96px;
-  padding-inline: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
-/* Título */
-.hero__title {
-  margin: 0;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 0.95;
-  font-size: clamp(2.4rem, 8vw, 3.6rem);
-  text-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+/* Opcional: bajarlo un poco */
+.hero__brand {
+  transform: translateY(20px);
 }
 
-/* Bajada */
-.hero__subtitle {
-  margin-top: 0.85rem;
-  max-width: 32ch;
-  font-size: 1rem;
-  line-height: 1.55;
-  opacity: 0.92;
+/* Logo */
+.hero__brand img {
+  width: min(600px, 90vw);
+  height: auto;
+  display: block;
 }
 
-/* Desktop */
-@media (min-width: 769px) {
-  .hero__container {
-    justify-content: flex-end;
-    max-width: 1100px;
-    padding-inline: 2rem;
+.hero__brand {
+  opacity: 0;
+  transform: translateY(10px) scale(1.02);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.hero.is-visible .hero__brand {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* HERO – aparición suave del logo */
+.hero-reveal {
+  opacity: 0;
+  transform: scale(0.98); /* casi imperceptible */
+  transition: opacity 1400ms ease-out, transform 1800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.hero-reveal.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Respeta usuarios con motion reducido */
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
-  .hero__title {
-    font-size: clamp(3.4rem, 5vw, 4.8rem);
-    line-height: 0.95;
+}
+/* Desktop */
+@media (min-width: 768px) {
+  /* si querés que en desktop NO sea pantalla completa */
+  .hero {
+    min-height: 100vh;
+  }
+  /* logo más grande en desktop */
+  .hero__brand img {
+    width: clamp(520px, 55vw, 760px);
   }
 }
 /* =========================
@@ -271,6 +266,7 @@
   font-weight: 800; /* fuerza tipo hero */
   line-height: 1.05;
   margin: 0;
+  text-align: center;
 }
 
 /* =========================
@@ -293,9 +289,7 @@
   overflow: hidden;
   background: #ffffff;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   padding: 0;
   border-radius: 0;
 }
@@ -313,11 +307,13 @@
   margin: 1.25rem 1.25rem 0;
   font-size: 1.15rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .section-servicios .card p {
   margin: 0.75rem 1.25rem 1.5rem;
   line-height: 1.6;
+  text-align: center;
 }
 
 /* Hover solo desktop */
@@ -448,9 +444,13 @@ body {
 }
 
 h1,
-h2,
 h3 {
   font-family: sans-serif;
+  font-weight: 500;
+}
+
+h2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 500;
 }
 
@@ -479,11 +479,7 @@ h3 {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.72),
-    rgba(255, 255, 255, 0.55)
-  );
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.55));
 }
 .section-contacto {
   /* El contenido arriba del overlay */
@@ -591,9 +587,7 @@ h3 {
 .section-proceso .process-card {
   opacity: 0;
   transform: translateY(30px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .section-proceso .process-card.is-visible {
@@ -659,10 +653,7 @@ h3 {
   text-decoration: none;
   font-weight: 600;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    opacity 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
 .wa-float:hover {
@@ -782,15 +773,9 @@ h3 {
 }
 body {
   background-color: #fdf3ea;
-  background-image:
-    radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-  background-size:
-    4px 4px,
-    6px 6px;
-  background-position:
-    0 0,
-    2px 2px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 4px 4px, 6px 6px;
+  background-position: 0 0, 2px 2px;
 }
 
 .process-card {
