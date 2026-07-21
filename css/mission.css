@@ -1,0 +1,63 @@
+/* =========================
+   MISSION / VISION (home)
+========================= */
+
+.mission-section {
+  background: #fff;
+  background-image: none;
+}
+
+main > .section.mission-section,
+.home-page > .section.mission-section {
+  background-color: #fff;
+  background-image: none;
+}
+
+.mission-grid {
+  display: grid;
+  gap: clamp(3.5rem, 7vw, 7rem);
+}
+
+.mission-column {
+  max-width: 32rem;
+  text-align: center;
+}
+
+.mission-section .services-eyebrow {
+  margin: 0;
+  color: var(--color-primary);
+  opacity: 1;
+  letter-spacing: 0.18em;
+  font-weight: var(--font-weight-bold);
+}
+
+.mission-title {
+  margin: 0;
+  max-width: 18ch;
+  margin-inline: auto;
+  color: var(--color-text);
+  font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.mission-copy {
+  margin: 0;
+  max-width: 32rem;
+  margin-inline: auto;
+  color: var(--color-text-muted);
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  line-height: 1.8;
+}
+
+.mission-column.stack-sm > * + * {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .mission-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
